@@ -1,0 +1,750 @@
+﻿@using SarftService.IServiceContract;
+@{
+    Layout = null;
+    ViewBag.Title = "已推荐举报信息列表";
+    List<ReportTypeInfo> typeInfo = ViewData["info"] as List<ReportTypeInfo>;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/amazeui.js"></script>
+    <link type="text/css" rel="stylesheet" href="/Content/amazeui.min.css" />
+    <script src="/Scripts/kkpager-master/src/kkpager.js"></script>
+    <link type="text/css" href="/Scripts/kkpager_blue.css" rel="stylesheet" />
+    <script src="/Scripts/Common/json2.js"></script>
+    <script src="/Scripts/ReportData/BroadCastInfoList.js"></script>
+    <script src="/Scripts/ReportData/ReportAjaxCenter.js"></script>
+    <script type="text/javascript">
+        jQuery(function () {
+
+            BroadCastInfoList.getInfoList();
+            //开启定时器
+            window.setInterval(BroadCastInfoList.interval, 2000*2);
+        });
+        //$(document).ready(function () {
+        //    var stepW = 24;
+        //    var description = new Array("很是一般", "一般", "值得播报", "推荐播报", "强烈推荐");
+        //    var stars = $("#star > li");
+        //    var descriptionTemp;
+        //    var starCount=-1;
+        //    $("#showb").css("width", 0);
+        //    stars.each(function (i) {
+        //        $(stars[i]).click(function (e) {
+        //            var n = i + 1;
+        //            $("#showb").css({ "width": stepW * n });
+        //            descriptionTemp = description[i];
+        //            starCount = i;
+        //            $(this).find('a').blur();
+        //            return stopDefault(e);
+        //            return descriptionTemp;
+        //            return starCount;
+        //        });
+        //    });
+        //    stars.each(function (i) {
+        //        $(stars[i]).hover(
+        //            function () {
+        //                $(".description").text(description[i]);
+        //            },
+        //            function () {
+        //                if (descriptionTemp != null){
+
+        //                    $(".description").text("当前您的评价为：" + descriptionTemp);
+        //                    document.getElementById("hdnStarCount").value = starCount + 2;
+        //                    //starCount = -1;
+        //                }
+        //                else
+        //                    $(".description").text(" ");
+        //            }
+        //        );
+        //    });
+        //});
+        //function stopDefault(e) {
+        //    if (e && e.preventDefault)
+        //        e.preventDefault();
+        //    else
+        //        window.event.returnValue = false;
+        //    return false;
+        //};
+        //桌面通知
+        function notify(obj) {
+            debugger;
+            /*添加授权按钮*/
+            if (!("webkitNotifications" in window)) {
+                if (("Notification" in window)) {
+                    window.webkitNotifications = window.Notification
+                    window.webkitNotifications.checkPermission = function () {
+                        switch (window.webkitNotifications.permission) {
+                            case "granted":
+                                return 0;
+                            case "denied":
+                                return 2;
+                            case "default":
+                                return 1;
+                        }
+                        return 2;
+                    }
+                    window.webkitNotifications.createNotification = function (var1, var2, var3) {
+                        return new Notification(var2, { icon: var1, body: var3 });
+                    }
+                } else {
+                    alert("你的浏览器不兼容啊");
+                }
+            }
+            /*添加授权按钮*/
+            if (window.webkitNotifications.checkPermission() != 0) {
+                $("#tweet_error_msg").html("您还没有授权通知:<input type='button' value='点击授权' onclick='Permission();' >").show();
+            }
+            if (window.webkitNotifications) {
+                if (window.webkitNotifications.checkPermission() == 0) {
+                    var notification_test = window.webkitNotifications.createNotification("/img/mes.gif", '您有新消息', '共' + obj + '条数据');
+                    notification_test.display = function () { }
+                    notification_test.onerror = function () { }
+                    notification_test.onclose = function () { }
+                    //notification_test.onclick = function () { this.cancel(); }
+                    notification_test.onclick = function () { Sub2(), this.cancel(); }
+
+                    notification_test.replaceId = 'Meteoric';
+
+                    notification_test.show();
+
+                    var tempPopup = window.webkitNotifications.createHTMLNotification(["http://www.baidu.com/", "http://www.soso.com"][Math.random() >= 0.5 ? 0 : 1]);
+                    tempPopup.replaceId = "Meteoric_cry";
+                    tempPopup.show();
+                } else {
+                    window.webkitNotifications.requestPermission(notify);
+                }
+
+            } else {
+                var notification_test = window.webkitNotifications.createNotification("/img/mes.gif", '您有新消息', '内容' + obj + '条数据');
+                notification_test.display = function () { }
+                notification_test.onerror = function () { }
+                notification_test.onclose = function () { }
+                //notification_test.onclick = function () { this.cancel(); }
+                notification_test.onclick = function () { Sub2(), this.cancel(); }
+                notification_test.replaceId = 'Meteoric';
+
+                notification_test.show();
+
+                var tempPopup = window.webkitNotifications.createHTMLNotification(["http://www.baidu.com/", "http://www.soso.com"][Math.random() >= 0.5 ? 0 : 1]);
+                tempPopup.replaceId = "Meteoric_cry";
+                tempPopup.show();
+            }
+        }
+        function Permission() {
+            switch (window.webkitNotifications.checkPermission()) {
+                case 0:
+                    $("#tweet_error_msg").hide().text("");
+                    break;
+                case 1:
+                    $("#tweet_error_msg input").val("看上面点允许");
+                    window.webkitNotifications.requestPermission(function () {
+                        if (window.webkitNotifications.checkPermission() == 0) {
+                            $("#tweet_error_msg").hide().text("")
+                        } else {
+                            $("#tweet_error_msg input").val("点击授权");
+                        };
+                    });
+                    break;
+                case 2:
+                    alert("浏览器被手动设为拒绝!");
+                    break;
+            }
+        }
+        function bigimg(i) {
+            var zoom = parseInt(i.style.zoom, 10) || 100;
+            zoom += event.wheelDelta / 12;
+            if (zoom > 0)
+                i.style.zoom = zoom + '%';
+            return false;
+        }
+    </script>
+    <style type="text/css">
+        /*容器*/
+        #xzw_starSys {
+            width: 220px;
+            height: 40px;
+            border: none;
+            margin: 25px auto;
+            padding-left: 50px;
+        }
+
+        #xzw_starBox {
+            position: relative;
+            width: 120px;
+            float: left;
+        }
+
+            #xzw_starBox ul, li {
+                list-style: none;
+            }
+
+            #xzw_starBox a {
+                color: #09f;
+            }
+        /**/
+        #xzw_starSys .description {
+            clear: both;
+            padding: 10px 0px;
+        }
+
+        #xzw_starSys .star {
+            height: 20px;
+            width: 120px;
+            position: relative;
+            background: url(/img/star.png) repeat-x;
+            cursor: pointer;
+        }
+
+            #xzw_starSys .star li {
+                float: left;
+                padding: 0px;
+                margin: 0px;
+            }
+
+                #xzw_starSys .star li a {
+                    display: block;
+                    width: 24px;
+                    height: 20px;
+                    overflow: hidden;
+                    text-indent: -9999px;
+                    position: absolute;
+                    z-index: 5;
+                }
+
+                    #xzw_starSys .star li a:hover {
+                        background: url(/img/star.png) 0 -25px repeat-x;
+                        z-index: 3;
+                        left: 0;
+                    }
+
+            #xzw_starSys .star a.one-star {
+                left: 0;
+            }
+
+                #xzw_starSys .star a.one-star:hover {
+                    width: 24px;
+                }
+
+            #xzw_starSys .star a.two-stars {
+                left: 24px;
+            }
+
+                #xzw_starSys .star a.two-stars:hover {
+                    width: 48px;
+                }
+
+            #xzw_starSys .star a.three-stars {
+                left: 48px;
+            }
+
+                #xzw_starSys .star a.three-stars:hover {
+                    width: 72px;
+                }
+
+            #xzw_starSys .star a.four-stars {
+                left: 72px;
+            }
+
+                #xzw_starSys .star a.four-stars:hover {
+                    width: 96px;
+                }
+
+            #xzw_starSys .star a.five-stars {
+                left: 96px;
+            }
+
+                #xzw_starSys .star a.five-stars:hover {
+                    width: 120px;
+                }
+
+        #xzw_starSys .current-rating {
+            background: url(/img/star.png) 0 -25px repeat-x;
+            position: absolute;
+            height: 20px;
+            z-index: 1;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="hidden" id="hidTime" />
+    <div class="admin-content">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@ViewBag.Title</strong></div>
+        </div>
+        <div class="am-g">
+            @*<span class="am-icon-folder-open am-icon-sm" style="background-color:tan"></span>*@
+            <div class="am-u-sm-12 am-u-md-12">
+                <div class="am-fl" style="margin-right:10px;">
+                    <select id="ReportType" data-am-selected="{searchBox: 1,maxHeight: 100}">
+                        <option value="0">举报类型</option>
+                        @{
+                            foreach (var info in typeInfo)
+                            {
+                                <option value="@info.Id">@info.ReportName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="am-fl" style="margin-right:15px;">
+                    <select id="CastFlag" data-am-selected="{searchBox: 1,maxHeight: 100}" onchange="SelTypeChange()">
+                        <option value="0">全部信息</option>
+                        <option value="1">未读信息</option>
+                        <option value="2">已读信息</option>
+                    </select>
+                </div>
+                @*<div class="am-fl" style="margin-right:15px;display:none;">
+                        <select id="SelStars" data-am-selected="{searchBox: 1,maxHeight: 100}" onchange="SelTypeChange()">
+                            <option value="0">全部评分</option>
+                            <option value="1">尚未评分</option>
+                            <option value="2">一颗心</option>
+                            <option value="3">两颗心</option>
+                            <option value="4">三颗心</option>
+                            <option value="5">四颗心</option>
+                            <option value="6">五颗心</option>
+                        </select>
+                    </div>*@
+                <div class="am-fl" style="margin-right:15px;">
+                    <select id="SelStatus" data-am-selected="{searchBox: 1,maxHeight: 100}" onchange="SelTypeChange()">
+                        <option value="7">推荐信息</option>
+                        <option value="2">未推荐</option>
+                        <option value="8">已推荐</option>
+                    </select>
+                </div>
+                <div class="am-fl" style="margin-right: 10px; width: 120px;">
+                    <input type="text" id="start" class="am-form-field" placeholder="开始时间" data-am-datepicker />
+                </div>
+                <div class="am-fl" style="margin-right: 10px; width: 120px;">
+                    <input type="text" id="end" class="am-form-field" placeholder="结束时间" data-am-datepicker />
+                </div>
+                <div class="am-fl" style="margin-right:10px;"><button type="button" class="am-btn am-btn-primary am-btn-group-lg" onclick="Sub(1)">查询</button></div>
+                <div class="am-fl" style="margin-right:10px;"><button type="button" class="am-btn am-btn-primary am-btn-group-lg" onclick="method()">导出</button></div>
+            </div>
+
+        </div>
+        <div class="am-g">
+            <div class="am-u-sm-12" style="min-height:200px;">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th>举报人</th>
+                            <th>举报人车牌</th>
+                            <th>举报类型</th>
+                            <th>被举报车牌号</th>
+                            <th>图片信息</th>
+                            <th>上报时间</th>
+                            @*<th>评分</th>*@
+                            <th>详情信息</th>
+                            <th>操  作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tables"></tbody>
+                </table>
+                <div id="kkpager"></div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" class="hidgoodsname" />
+    <input type="hidden" id="hdnconfigID" name="hdnconfigID" />
+    <input type="hidden" id="hdnScoreID" name="hdnScoreID" />
+    <input type="hidden" id="hdnStarCount" name="hdnStarCount" value="1" />
+    <!--初始化编辑页面-->
+    <button type="button" class="am-btn am-btn-primary pay" data-am-modal="{target: '#doc-modal-3', closeViaDimmer: 0, width: 830, height: 560}" style="display:none;">编辑</button>
+    <!--用户编辑-->
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-3">
+
+
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">
+                @*<span style="font-size:18px;font-weight:800;">信息编辑</span>*@
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd" style="margin-top:10px;">
+                <div class="am-g">
+                    <label id="msgtips" style="color:red;font-size:16px;font-weight:600;display:inline-block;float:left;"></label>
+                </div>
+                <div class="am-g" style="margin-top:10px;">
+                    <div class="am-u-lg-6" style="margin-top:10px;">
+                        <div id="img2">
+                            <!--图片展示-->
+                        </div>
+                    </div>
+                    <div class="am-u-lg-6">
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        举报人&nbsp;&nbsp;&nbsp;&nbsp;：
+                                    </span>
+                                    <label class="am-form-field" id="UserName"></label>
+                                </div>
+                            </div>
+                            </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        举报人车牌&nbsp;&nbsp;&nbsp;&nbsp;：
+                                    </span>
+                                    <label id="UserCarLicense" class="am-form-field"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        上报时间&nbsp;&nbsp;&nbsp;&nbsp;：
+                                    </span>
+                                    <label class="am-form-field" id="ReportTime"></label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        位置信息&nbsp;&nbsp;&nbsp;&nbsp;：
+                                    </span>
+                                    <textarea id="TextLocation" style="height:60px;" class="am-form-field" readonly="readonly"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*<div class="am-g" style="margin-top:10px;">
+                                <div class="am-u-lg-6">
+                                    <div class="am-input-group">
+                                        <span class="am-input-group-label">
+                                            上报时间&nbsp;&nbsp;&nbsp;&nbsp;：
+                                        </span>
+                                        <label class="am-form-field" id="ReportTime"></label>
+                                    </div>
+                                </div>
+                                <div class="am-u-lg-6">
+                                    <div class="am-input-group">
+                                        <span class="am-input-group-label">
+                                            位置信息&nbsp;&nbsp;&nbsp;&nbsp;：
+                                        </span>
+                                        <label id="TextLocation" class="am-form-field"></label>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        举报类型：
+                                    </span>
+                                    <select id="SelReportType" class="am-form-field">
+                                        <option value="0">请选择类型</option>
+                                        @{
+                                            foreach (var info in typeInfo)
+                                            {
+                                                <option value="@info.Id">@info.ReportName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        被举报车牌号&nbsp;&nbsp;&nbsp;&nbsp;：
+                                    </span>
+                                    <input type="text" id="ReportCarLicense" class="am-form-field" placeholder="请输入车牌号">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        信息说明：
+                                    </span>
+                                    <textarea id="CusRemark" style="height:60px;" class="am-form-field" placeholder="请输入信息"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        电台反馈：
+                                    </span>
+                                    <textarea id="BroRemark" style="height:60px;" class="am-form-field" placeholder="请输入信息"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        @*<div class="am-g" style="margin-top:10px;">
+                                <div class="am-u-lg-12">
+                                    <!--代码开始-->
+                                    <div id="xzw_starSys">
+                                        小主，给个评分给主播吧！
+                                        <div id="xzw_starBox">
+                                            <ul class="star" id="star">
+                                                <li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+                                                <li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+                                                <li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+                                                <li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+                                                <li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+                                            </ul>
+                                            <div class="current-rating" id="showb"></div>
+                                        </div>
+                                        <!--评价文字-->
+                                        <div class="description"></div>
+                                    </div>
+                                    <!--代码结束-->
+                                </div>
+
+                            </div>*@
+                        <div class="am-input-group" style="margin:10px auto; display:none;" id="Bsubmint">
+                            <div class="am-fl" style="margin-right:10px;"><button type="button" class="am-btn am-btn-secondary" data-am-modal-close>取　消</button></div>
+                            <div class="am-fl"><button type="button" class="am-btn am-btn-secondary" onclick="DoEdit(); return false;">保   存</button></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+            </div>
+        </div>
+    </div>
+
+    <!--查看详情-->
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">
+                信息详情
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <table class="am-table am-table-striped am-table-hover table-main" style="text-align:start;">
+                    <thead id="oinfo">
+
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <!--图片-->
+    @*<button style="display:none" type="button"
+                class="am-btn am-btn-primary Msg"
+                data-am-modal="{target: '#doc-modal-Msg', closeViaDimmer: 0, width: 600, height: 600}">
+            Modal
+        </button>
+        <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-Msg">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd">
+                    <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                </div>
+                <br />
+                <div class="am-modal-bd" id="img">
+
+                </div>
+
+            </div>
+
+        </div>*@
+
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="ProType-prompt">
+        <div class="am-modal-dialog" style="background:none;">
+
+            <div class="am-modal-bd" id="img" style="border:none;">
+
+            </div>
+
+        </div>
+    </div>
+    <!--END图片-->
+    <!--评分-->
+    @*<button style="display:none" type="button"
+                class="am-btn am-btn-primary Star"
+                data-am-modal="{target: '#doc-modal-Star', closeViaDimmer: 0, width: 440, height: 300}">
+            Modal
+        </button>
+        <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-Star">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd">
+                    <span style="font-size:18px;font-weight:800;">打个分呗</span>
+                    <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+                </div>
+                <div class="am-modal-bd" style="margin:20px;">
+                    <div class="am-g">
+                        <label id="scoremsgtips" style="color:red;font-size:16px;font-weight:600;display:inline-block;float:left;"></label>
+                    </div>
+                    <div class="am-g" style="margin-top:10px;">
+                        <!--代码开始-->
+                        <div id="xzw_starSys">
+                            <div id="xzw_starBox">
+                                <ul class="star" id="star">
+                                    <li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+                                    <li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+                                    <li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+                                    <li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+                                    <li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+                                </ul>
+                                <div class="current-rating" id="showb"></div>
+                            </div>
+                            <!--评价文字-->
+                            <div class="description"></div>
+                        </div>
+                        <!--代码结束-->
+                    </div>
+                    <br />
+
+                    <div class="am-input-group" style="margin:0 auto;">
+                        <div class="am-fl" style="margin-right:10px;"><button type="button" class="am-btn am-btn-secondary" data-am-modal-close>取　消</button></div>
+                        <div class="am-fl"><button type="button" class="am-btn am-btn-secondary" onclick="SaveScore(); return false;">保   存</button></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>*@
+    <!--END-->
+    <script type="text/javascript">
+
+        //初始化编辑页面
+        function InitForms(objid) {
+            if (objid<2) {
+                $("#Bsubmint").show();
+            } else {
+                $("#Bsubmint").hide();
+            }
+            document.getElementById("msgtips").innerHTML = "";
+            $("#UserName").html("");
+            $("#UserCarLicense").html("");
+            $("#ReportTime").html("");
+            $("#TextLocation").html("");
+            $("#SelReportType").val("0");
+            $("#ReportCarLicense").val("");
+            $("#CusRemark").val("");
+            $("#BroRemark").val("");
+        }
+        //初始化评分页面
+        function InitScores() {
+            $("#showb").css("width", 0);
+            $(".description").text(" ");
+          //  document.getElementById("scoremsgtips").innerHTML = "";
+            document.getElementById("hdnStarCount").value = 1;
+        }
+        //点击评分
+        function doScores(id) {
+            document.getElementById("hdnScoreID").value = id;
+            InitScores();
+            $(".Star").click();
+        }
+
+        //点击编辑
+        function updateReportData(id,objid) {
+            document.getElementById("hdnconfigID").value = id;
+            //初始化表单
+            InitForms(objid);
+            //初始化评分
+           // InitScores();
+            ReportAjaxCenter.getReportDataInfo(id);
+        }
+        //编辑保存
+        function DoEdit() {
+            var Id = document.getElementById("hdnconfigID").value;
+
+            var ReportType = $("#SelReportType").val();
+            if (ReportType == "0") {
+                showEmg("请选择举报类型");
+                return false;
+            }
+            var ReportCarLicense = $("#ReportCarLicense").val();
+            if (ReportCarLicense == "") {
+                showEmg("请填写被举报车牌号");
+                return false;
+            }
+          //  var StarCount = $("#hdnStarCount").val();
+            //if (StarCount < 2) {
+            //    showEmg("小主，您尚未打分呢！");
+            //    return false;
+            //}
+            var CusRemark = $("#CusRemark").val();
+            var BroRemark = $("#BroRemark").val();
+            var ContentConfig = {
+                "Id": Id,
+                "ReportType": ReportType,
+                "ReportCarLicense": ReportCarLicense,
+                "BroRemark": BroRemark,
+                "CusRemark": CusRemark
+                //"Stars": StarCount
+            };
+            var ConfigInfoJson = JSON.stringify(ContentConfig);
+            ReportAjaxCenter.saveCastReportDataContent(ConfigInfoJson);
+        }
+        //点击推荐
+        function doRecoment(id) {
+            ReportAjaxCenter.saveRecomand(id);
+        }
+        //取消推荐
+        function cancelRecoment(id) {
+            ReportAjaxCenter.cancelRecomand(id);
+        }
+        //评分保存
+        function SaveScore()
+        {
+            var Id = document.getElementById("hdnScoreID").value;
+
+            var StarCount = $("#hdnStarCount").val();
+            if (StarCount < 2) {
+                showEmg2("小主，您尚未打分呢！");
+                return false;
+            }
+            ReportAjaxCenter.saveCastScores(Id, StarCount);
+        }
+        //编辑消息提示
+        function showEmg(content) {
+            var msg = document.getElementById("msgtips");
+            msg.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;友情提示：" + content;
+            msg.style.display = "";
+        }
+        //编辑消息提示
+        function showEmg2(content) {
+            var msg = document.getElementById("scoremsgtips");
+            msg.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;友情提示：" + content;
+            msg.style.display = "";
+        }
+        //展示图片
+        function ShowImg(obj) {
+            $("#img").html("<img src=\"" + obj + "\" onmousewheel='return bigimg(this)'>");
+            // $(".Msg").click();
+            $('#ProType-prompt').modal({
+                relatedTarget: this,
+                onConfirm: function (e) {
+
+                },
+                onCancel: function (e) {
+
+                }
+            })
+            $("#ProType-prompt").show();
+        }
+    </script>
+</body>
+</html>

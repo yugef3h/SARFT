@@ -1,0 +1,251 @@
+﻿@using SarftService.IServiceContract;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>推荐栏</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <!-- jqgrid-->
+    <link href="/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/amazeui.js"></script>
+    <link type="text/css" rel="stylesheet" href="/Content/amazeui.min.css" />
+    <script src="/Scripts/kkpager-master/src/kkpager.js"></script>
+    <link type="text/css" href="/Scripts/kkpager_blue.css" rel="stylesheet" />
+    <script src="/Scripts/NotScreenMsg/NotScreenMsgRecommendList.js"></script>
+    <script type="text/javascript">
+        jQuery(function () {
+            NotScreenMsgRecommendList.search();
+            //举报
+            $("#selectedid").val(($('select').find('option').eq(0).prop('selected', true).val()));
+            var $selected = $("#js-selected");
+            $selected.on('change', function () {
+                $("#selectedid").val($(this).find('option').eq(this.selectedIndex).val());
+            });
+
+        });
+        function DoRecommend() {
+            var ID = document.getElementById("hidID").value;
+            NotScreenMsgRecommendList.saveReport(ID);
+        }
+        function bigimg(i) {
+            var zoom = parseInt(i.style.zoom, 10) || 100;
+            zoom += event.wheelDelta / 12;
+            if (zoom > 0)
+                i.style.zoom = zoom + '%';
+            return false;
+        }
+    </script>
+</head>
+<body class="gray-bg">
+    <input type="hidden" id="hidID" />
+    <input type="hidden" id="selectedid" />
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>推荐栏</h5><div id="tweet_error_msg"></div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="am-g">
+                            <div class="am-u-sm-12 am-u-md-12 ser">
+                                <div class="am-fl" style="margin-right: 10px; width: 100px;"><input type="text" class="am-form-field start" placeholder="开始时间" data-am-datepicker /></div>
+                                <div class="am-fl" style="margin-right: 10px; width: 100px;"><input type="text" class="am-form-field end" placeholder="结束时间" data-am-datepicker /></div>
+                                <div class="am-fl" style="margin-right:10px;"><button type="button" class="am-btn am-btn-primary  am-u-lg-centered" onclick="Sub()">查　询</button></div>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="jqGrid_wrapper">
+                            <div class="am-g">
+                                <div class="am-u-sm-12" style="min-height:200px;">
+                                    <table class="am-table am-table-striped am-table-hover table-main">
+                                        <thead>
+                                            <tr>
+                                                <th class="table-title">用户名</th>
+                                                <th class="table-title">用户车牌号</th>
+                                                <th class="table-author am-hide-sm-only">位置信息</th>
+                                                <th class="table-author am-hide-sm-only">图片</th>
+                                                <th class="table-author am-hide-sm-only">上报时间</th>
+                                                <th class="table-author am-hide-sm-only" colspan="2">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tables"></tbody>
+                                    </table>
+                                    <div id="kkpager"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--初始化编辑页面-->
+    <input type="hidden" id="recommendid" />
+    <button type="button" class="am-btn am-btn-primary pay" data-am-modal="{target: '#doc-modal-3', closeViaDimmer: 0, width: 830, height: 590}" style="display:none;">详情</button>
+    <div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-3">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd" style="margin-top:10px;">
+                <div class="am-g">
+                    <label id="msgtips" style="color:red;font-size:16px;font-weight:600;display:inline-block;float:left;"></label>
+                </div>
+                <div class="am-g" style="margin-top:10px;">
+                    <div class="am-u-lg-6" style="margin-top:10px;">
+                        <div id="imgs"></div>
+                    </div>
+                    <div class="am-u-lg-6">
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        用户名&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <input type="text" id="UserName" class="am-form-field">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        用户车牌号
+                                    </span>
+                                    <input type="text" id="UserCarLicense" class="am-form-field">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        位置信息&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <textarea class="am-form-field" style="height:100px;" id="TextLocation"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        上报时间&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <input type="text" class="am-form-field" id="ReportTime" data-am-datepicker />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        举报车牌号&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <input type="text" id="ReportCarLicense" class="am-form-field">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        举报类型&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <select id="js-selected" class="form-control" style="height:38px;">
+                                        <option value="0">全部举报类别</option>
+                                        @{
+                                            List<ReportTypeInfo> TypeList = new List<ReportTypeInfo>();
+                                            TypeList = DataHelper.ReportTypeList();
+                                            foreach (var item in TypeList)
+                                            {
+                                        <option value="@item.Id">@item.ReportName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="am-g" style="margin-top:10px;">
+                            <div class="am-u-lg-12">
+                                <div class="am-input-group">
+                                    <span class="am-input-group-label">
+                                        信息说明&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                    <textarea id="CusRemark" style="height:100px;" class="am-form-field"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="am-input-group" style="margin:0 auto;">
+                            <div class="am-fl" style="margin-right:10px;"><button type="button" class="am-btn am-btn-secondary" data-am-modal-close>取　消</button></div>
+                            <div class="am-fl" style="margin-right:10px;"><button type="button" class="am-btn am-btn-secondary" onclick="DoRecommend(); return false;">取消推荐</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="ProType-prompt">
+        <div class="am-modal-dialog" style="background:none;">
+
+            <div class="am-modal-bd" id="img" style="border:none;">
+
+            </div>
+
+        </div>
+    </div>
+    <!--END图片-->
+
+    <script src="/js/plugins/sweetalert/sweetalert.min.js"></script>
+    <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script type="text/javascript">
+        function cancelReport(id) {
+            swal({
+                title: "您确定要取消推荐该记录吗?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                closeOnConfirm: true
+            }, function () {
+                jQuery.ajax({
+                    url: "/NotScreenMsg/RecommendReport",
+                    type: "POST",
+                    dataType: "json",
+                    async: false,
+                    data: { ID: id },
+                    success: function (resultInfo) {
+                        if (resultInfo.Result > 0) {
+                            alert(resultInfo.Desc);
+                            selectPage(pageIndex, pageSize, $(".start").val(), $(".end").val(), 2, 0, 0, 0, 0, 0, 1, true);
+                        }
+                        else {
+                            alert("获取数据失败");
+                        }
+                    }
+                });
+            });
+            $(".cancel").text("取消");
+        }
+    </script>
+
+
+</body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_jqgrid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>

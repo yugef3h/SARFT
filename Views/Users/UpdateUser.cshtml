@@ -1,0 +1,200 @@
+﻿
+@{
+    Layout = null;
+    bool IsAdd = true;
+    if (ViewData["PowerList"] != null)
+    {
+        string power = ViewData["PowerList"].ToString();
+        <input type="hidden" id="checkid" value="@power" />
+    }
+    if (ViewBag.OpType == "Edit")
+    {
+        IsAdd = false;
+    }
+    var Title = " 修改用户";
+    if (ViewBag.OpType == "Add")
+    {
+        Title = " 新增用户";
+    }
+    ViewBag.Title = Title;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑用户</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link type="text/css" rel="stylesheet" href="/Content/amazeui.min.css" />
+    <link type="text/css" rel="stylesheet" href="/Content/admin.css">
+    <script type="text/javascript" src="/Scripts/amazeui.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.md5.js"></script>
+    <script src="/Scripts/Users/UsersList.js"></script>
+    <script type="text/javascript">
+        var isMobile = /^(?:13\d|15\d|16\d|18\d)\d{5}(\d{3}|\*{3})$/;
+        $(function () {
+            if ($("#UserName").val() != "") {
+                $('#UserName').attr("disabled", true);
+            }
+            //复选框
+            if ($("#checkid").val() != null && $("#checkid").val() != undefined) {
+                var cheid = $("#checkid").val().split(',');
+                for (var i = 0; i < $('input[name="pow"]').length; i++) {
+                    for (var s = 0; s < cheid.length; s++) {
+                        if (cheid[s] == (i + 1)) {
+                            $("#pow" + cheid[s]).prop("checked", "checked");
+                            continue;
+                        }
+                    }
+                }
+            };
+            //下拉框
+            $("#js-selected").find("option[value='" + $("#selectedid").val() + "']").attr("selected", true);
+            var $selected = $('#js-selected');
+            $selected.on('change', function () {
+                $("#selectedid").val($(this).find('option').eq(this.selectedIndex).val());
+            });
+        })
+        function AddUsersConfig() {
+            var id = 0;
+            var password = "";
+            if (document.getElementById("hidid").value != "") {
+                id = document.getElementById("hidid").value;
+            }
+            var UserName = document.getElementById("UserName").value;
+            if (UserName == "") {
+                alert("用户名不能为空！");
+                return false;
+            }
+            var password = document.getElementById("Password").value;
+            if (password == "") {
+                alert("密码不能为空！");
+                return false;
+            }
+            var Phone = document.getElementById("phone").value;
+            if (Phone == "") {
+                alert("电话号码不能为空！");
+                return false;
+            }
+            if (!isMobile.test($.trim($('#phone').val()))) {
+                alert("手机号码码格式不正确");
+                $('#phone').focus();
+                return false;
+            }
+            if ($("#selectedid").val() == "" || $("#selectedid").val() == undefined || $("#selectedid").val() == 0) {
+                alert("请选择职位");
+                return false;
+            }
+            var power = "";
+            $('input[name="pow"]:checked').each(function () {
+                power += $(this).val() + ",";
+            });
+            $("#checkList").val(power);
+            power = $("#checkList").val().substring(0, $("#checkList").val().length - 1);
+            if (power.length < 1) {
+                alert("最少选中一项权限");
+                return false;
+            } else {
+                var ContentConfig = {
+                    "Id": id,
+                    "UserName": UserName,
+                    "Password": jQuery.md5($("#Password").val()),
+                    "Phone": Phone,
+                    "RoleID": $("#selectedid").val(),
+                    "Power": power
+                };
+                var ConfigInfoJson = JSON.stringify(ContentConfig);
+                UsersList.saveUser(ConfigInfoJson);
+            }
+        }
+        function Getback() {
+            window.location.href = "/Users/Index";
+        }
+    </script>
+</head>
+<body>
+    <input type="hidden" value="@ViewBag.Id" id="hidid" />
+    <input type="hidden" id="selectedid" value="@ViewBag.RoleID" />
+    <input type="hidden" id="hidpassword" value="@ViewBag.Password" />
+    <input type="hidden" id="checkList" />
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">@ViewBag.Title</strong> </div>
+    </div>
+    <div class="am-tabs am-margin" data-am-tabs>
+        <ul class="am-tabs-nav am-nav am-nav-tabs">
+            <li class="am-active"><a href="#tab1">基本信息</a></li>
+        </ul>
+        <div class="am-tabs-bd">
+            <div class="am-tab-panel am-fade am-in am-active" id="tab1" style="min-height:500px;">
+                <form class="am-form">
+                    <div class="am-g am-margin-top-sm">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                            用户名：
+                        </div>
+                        <div class="am-u-sm-8 am-u-md-4 am-u-end">
+                            <input type="text" name="UserName" id="UserName" value="@ViewBag.UserName" class="am-input-sm" placeholder="请输入用户名">
+                        </div>
+                        <div class="am-hide-sm-only am-u-md-6" style="color:red;">*必填</div>
+                    </div>
+
+                    <div class="am-g am-margin-top-sm">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                            密码：
+                        </div>
+                        <div class="am-u-sm-8 am-u-md-4 am-u-end">
+                            <input type="password" name="Password" id="Password" class="am-input-sm" placeholder="请输入密码">
+                        </div>
+                        <div class="am-hide-sm-only am-u-md-6" style="color:red;">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top-sm">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                            手机号：
+                        </div>
+                        <div class="am-u-sm-8 am-u-md-4 am-u-end">
+                            <input type="text" name="phone" id="phone" value="@ViewBag.Phone" class="am-input-sm " placeholder="请输入手机号">
+                        </div>
+                        <div class="am-hide-sm-only am-u-md-6" style="color:red;">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top-sm">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                            职务：
+                        </div>
+                        <div class="am-u-sm-8 am-u-md-4 am-u-end">
+                            <div class="am-fl" style="margin-right:15px;">
+                                <select id="js-selected" data-am-selected="{searchBox: 1,maxHeight: 200}" style="width:120px;">
+                                    <option value="0">请选择职务</option>
+                                    <option value="1">客服</option>
+                                    <option value="2">导播</option>
+                                    <option value="3">主持人</option>
+                                    <option value="4">管理员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-hide-sm-only am-u-md-6" style="color:red;">*必选</div>
+                    </div>
+                    <div class="am-g am-margin-top-sm">
+                        <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                            请选择权限：
+                        </div>
+                        <div class="am-u-sm-8 am-u-md-4 am-u-end">
+                            <input type="checkbox" name="pow" id="pow1" value="1" />未筛选违章信息
+                            <input type="checkbox" name="pow" id="pow2" value="2" />客服推荐违章信息
+                            <input type="checkbox" name="pow" id="pow3" value="3" />导播推荐违章信息
+                            <input type="checkbox" name="pow" id="pow3" value="4" />违章信息操作日志
+                        </div>
+                        <div class="am-hide-sm-only am-u-md-6" style="color:red;">*必选</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="am-margin">
+        <input type="button" name="" value="保　存"  class="am-btn am-btn-primary am-btn-xs" onclick="AddUsersConfig()">&nbsp;&nbsp;&nbsp;
+        <input type="button" name="" value="返　回"  class="am-btn am-btn-primary am-btn-xs" onclick="Getback()">
+    </div>
+</body>
+</html>

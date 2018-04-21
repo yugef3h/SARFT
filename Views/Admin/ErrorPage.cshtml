@@ -1,0 +1,88 @@
+﻿@using SarftService.IServiceContract;
+@{
+    Layout = null;
+    SysErrorInfo ErrorInfo = ViewData["ErrorInfo"] as SysErrorInfo;
+    ViewBag.Title = "出错啦";
+}
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script type="text/javascript" src="/Scripts/System/SystemAjaxCenter.js"></script>
+    <link type="text/css" rel="stylesheet" href="/Content/amazeui.min.css" />
+    <script type="text/javascript" src="/Scripts/Common/json2.js"></script>
+    <link type="text/css" rel="stylesheet" href="/Content/admin.css">
+    <script src="/Scripts/kkpager-master/src/kkpager.js"></script>
+    <script type="text/javascript" src="/Scripts/amazeui.js"></script>
+    <script type="text/javascript" src="/Scripts/app.js"></script>
+    <link type="text/css" href="/Scripts/kkpager_blue.css" rel="stylesheet" />
+
+</head>
+<body>
+    <link type="text/css" href="/Content/animate.delay.css" rel="stylesheet" />
+    <style type="text/css">
+        .errortitle {
+            text-align: center;
+            margin-top: 5%;
+        }
+
+            .errortitle h4 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .errortitle span {
+                display: inline-block;
+                font-size: 120px;
+                background: #333;
+                color: #fff;
+                line-height: normal;
+                padding: 10px 30px;
+                margin-left: 7px;
+            }
+
+            .errortitle .errorbtns {
+                margin-top: 20px;
+            }
+
+                .errortitle .errorbtns a {
+                    margin-right: 7px;
+                    display: inline-block;
+                }
+    </style>
+    <div class="errortitle">
+        <h4 class="animate0 fadeInUp">
+            哎呦喂~报错啦!
+        </h4>
+        <span class="animate1 bounceIn">4</span>
+        <span class="animate2 bounceIn">0</span>
+        <span class="animate3 bounceIn">4</span>
+        <h4 class="animate4 fadeInUp">
+            请将以下报错信息截图给程序猿。
+        </h4>
+        <h5 class="widgettitle title-info animate5 fadeInUp">
+            @if (ErrorInfo != null)
+            {
+                <text>
+                    错误代码：@ErrorInfo.GUID
+                    <br>
+                    错误信息：@ErrorInfo.Message;
+                    <br>
+                    请求信息：@ErrorInfo.RequestInfo
+                    @*<br>
+                        堆栈跟踪：@ErrorInfo.StackTrace;*@
+                </text>
+            }
+        </h5>
+        <div class="errorbtns animate6 fadeInUp">
+            <a onclick="history.back()" href="javascript:void()" class="btn btn-primary btn-large">返回上一页</a>
+            @*<a href="/Home/Index" class="btn btn-large">回到首页</a>*@
+        </div>
+    </div>
+</body>
+</html>

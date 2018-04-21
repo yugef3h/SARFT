@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>举报类型管理列表</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <!-- jqgrid-->
+    <link href="/css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/amazeui.js"></script>
+    <link type="text/css" rel="stylesheet" href="/Content/amazeui.min.css" />
+    <script src="/Scripts/kkpager-master/src/kkpager.js"></script>
+    <link type="text/css" href="/Scripts/kkpager_blue.css" rel="stylesheet" />
+    <script src="/Scripts/LogMessage/LogMessage.js"></script>
+    <script type="text/javascript">
+        jQuery(function () {
+            LogMessage.search();
+            $("#selectedid").val(($('select').find('option').eq(0).prop('selected', true).val()));
+            var $selected = $('#js-selected');
+            $selected.on('change', function () {
+                $("#selectedid").val($(this).find('option').eq(this.selectedIndex).val());
+                Sub();
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="hidden" id="selectedid" />
+    <div class="admin-content">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">日志管理列表</strong></div>
+        </div>
+        <div class="am-g">
+            <div class="am-fl" style="margin-right:15px;">
+                <select id="js-selected" data-am-selected="{maxHeight: 180}">
+                    <option value="0">全部信息</option>
+                    <option value="1">客服编辑</option>
+                    <option value="2">客服删除</option>
+                    <option value="3">客服恢复</option>
+                    <option value="4">客服推荐</option>
+                    <option value="6">客服取消推荐</option>
+                    <option value="5">导播推荐</option>
+                    <option value="10">导播取消推荐</option>
+                    <option value="7">导播编辑</option>
+                    <option value="8">主持人通知</option>
+                    <option value="9">主持人播报</option>
+                </select>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-sm-12" style="min-height:200px;">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                        <tr>
+                            <th class="table-title">操作用户</th>
+                            <th class="table-title">操作类型</th>
+                            <th class="table-title">违章信息</th>
+                            <th class="table-title">操作时间</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tables"></tbody>
+                </table>
+                <div id="kkpager"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_jqgrid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+</html>

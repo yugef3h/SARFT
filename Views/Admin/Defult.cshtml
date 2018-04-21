@@ -1,0 +1,48 @@
+﻿@using SarftService.IServiceContract;
+@{
+    Layout = null;
+    UsersInfo userInfo = new UsersInfo();
+    string RoleName = string.Empty;
+    if (CookieHelper.GetValue("UsersID") == null)
+    {
+        ViewContext.RequestContext.HttpContext.Response.Redirect("/Login");
+
+    }
+    else if (CookieHelper.GetValue("SessionsID") == null)
+    {
+        ViewContext.RequestContext.HttpContext.Response.Redirect("/Login");
+    }
+    else
+    {
+        userInfo = Global.ServiceClient.GetUserInfoById(Convert.ToInt64(CookieHelper.GetValue("UsersID")));
+        if (CookieHelper.GetValue("SessionsID") != (userInfo.UserName + userInfo.Password))
+        {
+            ViewContext.RequestContext.HttpContext.Response.Redirect("/Login");
+        }
+        else
+        {
+            if (userInfo.RoleID == 1)
+            { RoleName = "欢迎客服登陆电台违章举报平台！"; }
+            else if (userInfo.RoleID == 2)
+            { RoleName = "欢迎导播登陆电台违章举报平台！"; }
+            else if (userInfo.RoleID == 3)
+            { RoleName = "欢迎主持人登陆电台违章举报平台！"; }
+            else
+            { RoleName = "欢迎管理员登陆电台违章举报平台！"; }
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>电台违章举报平台</title>
+</head>
+<body>
+    <div style="min-height:300px;margin:15px;">
+        <h1>&nbsp;&nbsp;&nbsp;&nbsp;@RoleName</h1>
+    </div>
+</body>
+</html>
