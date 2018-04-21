@@ -1,0 +1,239 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SarftService", "SarftService\SarftService\SarftService.csproj", "{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SarftService.DBProvider", "SarftService\SarftService.DBProvider\SarftService.DBProvider.csproj", "{8397402A-61FC-1660-35B2-BCAE16475683}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SarftService.IServiceContract", "SarftService\SarftService.IServiceContract\SarftService.IServiceContract.csproj", "{22D97B57-2E0F-BF12-B80A-B70F0060F76A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SarftService.ServiceCommon", "SarftService\SarftService.ServiceCommon\SarftService.ServiceCommon.csproj", "{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SarftService.ServiceMain", "SarftService\SarftService.ServiceMain\SarftService.ServiceMain.csproj", "{B214854D-0ED4-8F7E-9C40-63A32154089C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SarftService.ServiceModel", "SarftService\SarftService.ServiceModel\SarftService.ServiceModel.csproj", "{90664A6D-9690-1150-E94A-373D61894AB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SarftService.ServiceImpl", "SarftService\SarftService.ServiceImpl\SarftService.ServiceImpl.csproj", "{24953B7A-B0CE-30A3-D40F-903D149ECA15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "依赖项目", "依赖项目", "{B2F470F7-BFEB-4B2F-82E5-D755462A9108}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadMediaDataClient", "..\..\公共服务\OSS小文件存储服务\OSSClient\UploadMediaDataClient.csproj", "{8DE6A861-8780-4E83-BB50-AC291EA9DB77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudDogClient", "..\..\车控宝\业务数据服务\CloudDog业务\CloudDogClient\CloudDogClient.csproj", "{CF0DFEF3-5B13-4C54-8845-655769B9A997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudDog.IServiceContract", "..\..\车控宝\业务数据服务\CloudDog业务\CloudDog\CloudDog.IServiceContract\CloudDog.IServiceContract.csproj", "{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerminalClient", "..\..\车控宝\终端数据服务\TerminalClient\TerminalClient.csproj", "{45B2DE26-5F76-4129-BB42-4116C33ACA66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerminalDataService.IServiceContract", "..\..\车控宝\终端数据服务\TerminalDataService\TerminalDataService.IServiceContract\TerminalDataService.IServiceContract.csproj", "{AA7E0FB6-11D0-4918-9875-F91689DC0763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DES", "..\..\公共服务\DES\DES.csproj", "{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPS.Common", "..\..\公共组件\TSPServer\GPS.Common\GPS.Common.csproj", "{D5371407-F7D7-4D65-B50A-32FC92C67CF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatacastingClient", "..\..\未归类\消息总线服务\DatacastingClient\DatacastingClient.csproj", "{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Debug|x86.Build.0 = Debug|Any CPU
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F42E235-D3F1-6463-B99A-6CB86D78E0C7}.Release|x86.Build.0 = Release|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Debug|x86.Build.0 = Debug|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Release|x86.ActiveCfg = Release|Any CPU
+		{8397402A-61FC-1660-35B2-BCAE16475683}.Release|x86.Build.0 = Release|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Debug|x86.Build.0 = Debug|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Release|x86.ActiveCfg = Release|Any CPU
+		{22D97B57-2E0F-BF12-B80A-B70F0060F76A}.Release|x86.Build.0 = Release|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Debug|x86.Build.0 = Debug|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}.Release|x86.Build.0 = Release|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B214854D-0ED4-8F7E-9C40-63A32154089C}.Release|x86.Build.0 = Release|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Debug|x86.Build.0 = Debug|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Release|x86.ActiveCfg = Release|Any CPU
+		{90664A6D-9690-1150-E94A-373D61894AB0}.Release|x86.Build.0 = Release|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Debug|x86.Build.0 = Debug|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Release|x86.ActiveCfg = Release|Any CPU
+		{24953B7A-B0CE-30A3-D40F-903D149ECA15}.Release|x86.Build.0 = Release|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Debug|x86.Build.0 = Debug|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Release|x86.ActiveCfg = Release|Any CPU
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77}.Release|x86.Build.0 = Release|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Debug|x86.Build.0 = Debug|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997}.Release|x86.Build.0 = Release|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Debug|x86.Build.0 = Debug|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE}.Release|x86.Build.0 = Release|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Debug|x86.Build.0 = Debug|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Release|x86.ActiveCfg = Release|Any CPU
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66}.Release|x86.Build.0 = Release|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Debug|x86.Build.0 = Debug|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Release|x86.ActiveCfg = Release|Any CPU
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763}.Release|x86.Build.0 = Release|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Debug|x86.Build.0 = Debug|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Release|x86.ActiveCfg = Release|Any CPU
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3}.Release|x86.Build.0 = Release|Any CPU
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Debug|x86.ActiveCfg = Debug|x86
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Debug|x86.Build.0 = Debug|x86
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Release|x86.ActiveCfg = Release|x86
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2}.Release|x86.Build.0 = Release|x86
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Debug|x86.ActiveCfg = Debug|x86
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Debug|x86.Build.0 = Debug|x86
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Release|x86.ActiveCfg = Release|x86
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8DE6A861-8780-4E83-BB50-AC291EA9DB77} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+		{CF0DFEF3-5B13-4C54-8845-655769B9A997} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+		{3D3E6DB9-B44D-4E17-85F2-DDE76B0912CE} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+		{45B2DE26-5F76-4129-BB42-4116C33ACA66} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+		{AA7E0FB6-11D0-4918-9875-F91689DC0763} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+		{2AB68DED-A08B-4DFC-866F-5EEDBE8347B3} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+		{D5371407-F7D7-4D65-B50A-32FC92C67CF2} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+		{2BD81FC2-12F5-4213-92C3-E8D20D3ED830} = {B2F470F7-BFEB-4B2F-82E5-D755462A9108}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 16
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://redmine.fxft.net:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SarftService\\SarftService.DBProvider\\SarftService.DBProvider.csproj
+		SccProjectName1 = SarftService/SarftService.DBProvider
+		SccLocalPath1 = SarftService\\SarftService.DBProvider
+		SccProjectUniqueName2 = SarftService\\SarftService.IServiceContract\\SarftService.IServiceContract.csproj
+		SccProjectName2 = SarftService/SarftService.IServiceContract
+		SccLocalPath2 = SarftService\\SarftService.IServiceContract
+		SccProjectUniqueName3 = SarftService\\SarftService.ServiceCommon\\SarftService.ServiceCommon.csproj
+		SccProjectName3 = SarftService/SarftService.ServiceCommon
+		SccLocalPath3 = SarftService\\SarftService.ServiceCommon
+		SccProjectUniqueName4 = SarftService\\SarftService.ServiceImpl\\SarftService.ServiceImpl.csproj
+		SccProjectName4 = SarftService/SarftService.ServiceImpl
+		SccLocalPath4 = SarftService\\SarftService.ServiceImpl
+		SccProjectUniqueName5 = SarftService\\SarftService.ServiceMain\\SarftService.ServiceMain.csproj
+		SccProjectName5 = SarftService/SarftService.ServiceMain
+		SccLocalPath5 = SarftService\\SarftService.ServiceMain
+		SccProjectUniqueName6 = SarftService\\SarftService.ServiceModel\\SarftService.ServiceModel.csproj
+		SccProjectName6 = SarftService/SarftService.ServiceModel
+		SccLocalPath6 = SarftService\\SarftService.ServiceModel
+		SccProjectUniqueName7 = SarftService\\SarftService\\SarftService.csproj
+		SccProjectName7 = SarftService/SarftService
+		SccLocalPath7 = SarftService\\SarftService
+		SccProjectUniqueName8 = ..\\..\\公共服务\\OSS小文件存储服务\\OSSClient\\UploadMediaDataClient.csproj
+		SccProjectTopLevelParentUniqueName8 = SarftService.sln
+		SccProjectName8 = ../../公共服务/OSS小文件存储服务/OSSClient
+		SccLocalPath8 = ..\\..\\公共服务\\OSS小文件存储服务\\OSSClient
+		SccProjectUniqueName9 = ..\\..\\车控宝\\业务数据服务\\CloudDog业务\\CloudDogClient\\CloudDogClient.csproj
+		SccProjectTopLevelParentUniqueName9 = SarftService.sln
+		SccProjectName9 = ../../车控宝/业务数据服务/CloudDog业务/CloudDogClient
+		SccLocalPath9 = ..\\..\\车控宝\\业务数据服务\\CloudDog业务\\CloudDogClient
+		SccProjectUniqueName10 = ..\\..\\车控宝\\业务数据服务\\CloudDog业务\\CloudDog\\CloudDog.IServiceContract\\CloudDog.IServiceContract.csproj
+		SccProjectTopLevelParentUniqueName10 = SarftService.sln
+		SccProjectName10 = ../../车控宝/业务数据服务/CloudDog业务/CloudDog/CloudDog.IServiceContract
+		SccLocalPath10 = ..\\..\\车控宝\\业务数据服务\\CloudDog业务\\CloudDog\\CloudDog.IServiceContract
+		SccProjectUniqueName11 = ..\\..\\车控宝\\终端数据服务\\TerminalClient\\TerminalClient.csproj
+		SccProjectTopLevelParentUniqueName11 = SarftService.sln
+		SccProjectName11 = ../../车控宝/终端数据服务/TerminalClient
+		SccLocalPath11 = ..\\..\\车控宝\\终端数据服务\\TerminalClient
+		SccProjectUniqueName12 = ..\\..\\车控宝\\终端数据服务\\TerminalDataService\\TerminalDataService.IServiceContract\\TerminalDataService.IServiceContract.csproj
+		SccProjectTopLevelParentUniqueName12 = SarftService.sln
+		SccProjectName12 = ../../车控宝/终端数据服务/TerminalDataService/TerminalDataService.IServiceContract
+		SccLocalPath12 = ..\\..\\车控宝\\终端数据服务\\TerminalDataService\\TerminalDataService.IServiceContract
+		SccProjectUniqueName13 = ..\\..\\公共服务\\DES\\DES.csproj
+		SccProjectTopLevelParentUniqueName13 = SarftService.sln
+		SccProjectName13 = ../../公共服务/DES
+		SccLocalPath13 = ..\\..\\公共服务\\DES
+		SccProjectUniqueName14 = ..\\..\\公共组件\\TSPServer\\GPS.Common\\GPS.Common.csproj
+		SccProjectTopLevelParentUniqueName14 = SarftService.sln
+		SccProjectName14 = ../../公共组件/TSPServer/GPS.Common
+		SccLocalPath14 = ..\\..\\公共组件\\TSPServer\\GPS.Common
+		SccProjectUniqueName15 = ..\\..\\未归类\\消息总线服务\\DatacastingClient\\DatacastingClient.csproj
+		SccProjectTopLevelParentUniqueName15 = SarftService.sln
+		SccProjectName15 = ../../未归类/消息总线服务/DatacastingClient
+		SccLocalPath15 = ..\\..\\未归类\\消息总线服务\\DatacastingClient
+	EndGlobalSection
+EndGlobal

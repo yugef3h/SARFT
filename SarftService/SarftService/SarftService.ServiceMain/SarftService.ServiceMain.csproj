@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B214854D-0ED4-8F7E-9C40-63A32154089C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SarftService.ServiceMain</RootNamespace>
+    <AssemblyName>SarftService.ServiceMain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NRails.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\DllReference\NRails.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NRails.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\DllReference\NRails.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="Service.Data.Manager">
+      <HintPath>D:\SourceCode\DllReference\Service.Data.Manager.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceContainer, Version=1.0.5892.27634, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\DllReference\ServiceContainer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartUp.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\公共服务\OSS小文件存储服务\OSSClient\UploadMediaDataClient.csproj">
+      <Project>{8de6a861-8780-4e83-bb50-ac291ea9db77}</Project>
+      <Name>UploadMediaDataClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\车控宝\业务数据服务\CloudDog业务\CloudDogClient\CloudDogClient.csproj">
+      <Project>{cf0dfef3-5b13-4c54-8845-655769b9a997}</Project>
+      <Name>CloudDogClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\车控宝\业务数据服务\CloudDog业务\CloudDog\CloudDog.IServiceContract\CloudDog.IServiceContract.csproj">
+      <Project>{3d3e6db9-b44d-4e17-85f2-dde76b0912ce}</Project>
+      <Name>CloudDog.IServiceContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SarftService.DBProvider\SarftService.DBProvider.csproj">
+      <Project>{8397402A-61FC-1660-35B2-BCAE16475683}</Project>
+      <Name>SarftService.DBProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SarftService.IServiceContract\SarftService.IServiceContract.csproj">
+      <Project>{22D97B57-2E0F-BF12-B80A-B70F0060F76A}</Project>
+      <Name>SarftService.IServiceContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SarftService.ServiceCommon\SarftService.ServiceCommon.csproj">
+      <Project>{6CA53281-082C-5AC0-EC67-84B5BD7E2B1E}</Project>
+      <Name>SarftService.ServiceCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SarftService.ServiceImpl\SarftService.ServiceImpl.csproj">
+      <Project>{24953B7A-B0CE-30A3-D40F-903D149ECA15}</Project>
+      <Name>SarftService.ServiceImpl</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
